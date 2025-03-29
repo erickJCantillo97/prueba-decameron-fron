@@ -5,8 +5,8 @@
 <script setup lang="ts">
 import LargeMenu from "./LargeMenu.vue";
 import MiniMenu from "./MiniMenu.vue";
-
-import { HomeIcon } from "@heroicons/vue/24/outline";
+import { House } from "lucide-vue-next";
+// import { HomeIcon } from "@heroicons/vue/24/outline";
 // import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
 interface navigationItem {
@@ -24,7 +24,7 @@ const navigation: navigationItem[] = [
   {
     name: "Inicio",
     href: "/",
-    icon: HomeIcon,
+    icon: House,
     current: true,
   },
 ];

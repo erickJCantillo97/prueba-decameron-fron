@@ -98,7 +98,7 @@
 </template>
 <script setup lang="ts">
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue";
-import { XMarkIcon, Cog6ToothIcon } from "@heroicons/vue/24/outline";
+// import { XMarkIcon, Cog6ToothIcon } from "@heroicons/vue/24/outline";
 import LogoAvColombia from "@/components/icons/logoAvColombia.vue";
 interface props {
   navigation: {

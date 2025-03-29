@@ -57,7 +57,7 @@
 </template>
 <script setup lang="ts">
 import LogoAvColombia from "@/components/icons/logoAvColombia.vue";
-import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
+// import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 interface props {
   navigation: {
     name: string;
