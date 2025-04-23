@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import router from '@/router'
 
 export default class AuthService {
+
   async login(email: string, password: string) {
     const store = useAuthStore()
     const { user, userToken } = storeToRefs(store)
