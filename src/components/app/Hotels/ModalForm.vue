@@ -21,6 +21,12 @@
           );
         "
       >
+        <div
+          @click="visible = false"
+          class="absolute cursor-pointer text-white -top-4 -right-4 w-auto p-2 rounded-full justify-end flex bg-red-400 hover:scale-75 hover:border-2 border-red-500"
+        >
+          <X />
+        </div>
         <h1 class="text-center font-bold text-blue-900 text-2xl">
           {{ `${hotel ? "Editar " : "Crear "} Hotel` }}
         </h1>
@@ -90,6 +96,7 @@ import { ref } from "vue";
 import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import HotelService from "@/services/Hotels";
+import { X } from "lucide-vue-next";
 
 const hotelService = new HotelService();
 

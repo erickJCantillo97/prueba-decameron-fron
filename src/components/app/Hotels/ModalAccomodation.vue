@@ -21,6 +21,12 @@
           );
         "
       >
+        <div
+          @click="visible = false"
+          class="absolute cursor-pointer text-white -top-4 -right-4 w-auto p-2 rounded-full justify-end flex bg-red-400 hover:scale-75 hover:border-2 border-red-500"
+        >
+          <X />
+        </div>
         <div class="flex justify-between w-full">
           <h1 class="font-bold text-blue-900 text-2xl">
             Habitaciones del hotel {{ hotel.name }}
@@ -86,7 +92,7 @@ import type { Hotel } from "@/types";
 import Button from "primevue/button";
 import Dialog from "primevue/dialog";
 import { computed, ref } from "vue";
-import { Hotel as HotelIcon, Plus } from "lucide-vue-next";
+import { Hotel as HotelIcon, Plus, X } from "lucide-vue-next";
 import InputNumber from "primevue/inputnumber";
 import HotelService from "@/services/Hotels";
 import Select from "primevue/select";
@@ -110,9 +116,9 @@ const accommodationForm = ref<{
 
 const submit = () => {
   hotelService.addRoom(props.hotel.id, {
-    id: '', // Temporary ID that will be replaced by backend
+    id: "", // Temporary ID that will be replaced by backend
     hotel_id: props.hotel.id,
-    ...accommodationForm.value
+    ...accommodationForm.value,
   });
 };
 

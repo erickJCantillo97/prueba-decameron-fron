@@ -12,7 +12,7 @@ import { useAuthStore } from '@/stores/Auth'
 import VueSweetalert2 from 'vue-sweetalert2';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
-
+import Tooltip from 'primevue/tooltip';
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -29,6 +29,7 @@ app.use(PrimeVue, {
     preset: Aura
   }
 });
+app.directive('tooltip', Tooltip);
 app.mount('#app')
 const store = useAuthStore()
 
