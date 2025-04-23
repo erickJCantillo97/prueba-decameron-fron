@@ -19,7 +19,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const authStore = useAuthStore()
   const { isAuthenticated } = storeToRefs(authStore)
 
