@@ -1,8 +1,8 @@
 <template>
   <div>
-    <IndexMenu v-model="sidebarOpen"></IndexMenu>
+    <!-- <IndexMenu v-model="sidebarOpen"></IndexMenu> -->
 
-    <div class="lg:pl-72 px-2 mx-2">
+    <div class="px-2 mx-2">
       <Index v-model="sidebarOpen"></Index>
       <main class="py-10">
         <div class="px-4 lg:px-2">

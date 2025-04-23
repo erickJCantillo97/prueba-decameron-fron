@@ -69,7 +69,11 @@
             :options="optionsAccommodation[accommodationForm.room_type]"
           ></Select>
           <div class="flex justify-between items-center">
-            <Button severity="success" @click="submit">
+            <Button
+              severity="success"
+              :disabled="accommodationForm.total_rooms == 0"
+              @click="submit"
+            >
               <Plus class="size-4" />
             </Button>
           </div>

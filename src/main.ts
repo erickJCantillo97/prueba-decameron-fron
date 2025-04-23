@@ -19,6 +19,7 @@ pinia.use(piniaPluginPersistedstate)
 
 
 axios.defaults.baseURL = 'https://decameron.laravel.cloud/api/'
+// axios.defaults.baseURL = 'https:/hoteles.test/api/'
 const app = createApp(App)
 app.use(pinia)
 app.use(router)
