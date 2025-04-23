@@ -6,13 +6,7 @@
         <p class="mt-2 text-sm text-gray-700">Listado de Hoteles</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center gap-x-2">
-        <input
-          type="date"
-          class="rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-        />
-        <Button class="text-xs" severity="secondary" text="pdf">
-          <FileDown class="w-4 h-4" />
-        </Button>
+        <Modal> Nuevo Hotel </Modal>
       </div>
     </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
@@ -64,18 +58,18 @@
               <div>{{ hotel.total_rooms }}</div>
             </td>
             <td class="text-gray-900 py-2 text-sm px-3 flex">
-              <Button severity="transparent" class="">
-                <Hotel class="text-primary size-4"></Hotel>
-              </Button>
-              <Button severity="transparent" class="">
-                <Pencil class="text-blue-600 size-4"></Pencil>
-              </Button>
+              <ModalAccomodation :hotel="hotel"></ModalAccomodation>
+              <Modal :hotel="hotel">
+                <Pencil class="size-4"></Pencil>
+              </Modal>
+
               <Button
-                severity="transparent"
-                class=""
+                text
+                severity="danger"
+                size="small"
                 @click="hotelService.delete(hotel.id)"
               >
-                <Trash2 class="text-red-600 size-4"></Trash2>
+                <Trash2 class="size-4"></Trash2>
               </Button>
             </td>
           </tr>
@@ -86,12 +80,14 @@
 </template>
 
 <script setup lang="ts">
-import Button from "@/components/ui/Button.vue";
-import { FileDown, Hotel, Pencil, Trash2 } from "lucide-vue-next";
+import { Pencil, Trash2 } from "lucide-vue-next";
 import HotelService from "@/services/Hotels";
 import { onMounted } from "vue";
-import { useHotelsStore } from "@/stores/Hotels";
+import { useHotelsStore } from "@/stores/hotels";
 import { storeToRefs } from "pinia";
+import Button from "primevue/button";
+import Modal from "@/components/app/Hotels/ModalForm.vue";
+import ModalAccomodation from "../../components/app/Hotels/ModalAccomodation.vue";
 
 const hotelStore = useHotelsStore();
 const hotelService = new HotelService();

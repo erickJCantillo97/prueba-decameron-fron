@@ -1,0 +1,127 @@
+<template>
+  <Button text size="small" severity="info" @click="visible = true">
+    <HotelIcon class="size-4" />
+  </Button>
+
+  <Dialog
+    v-model:visible="visible"
+    modal
+    :style="{ width: '70vw' }"
+    pt:root:class="!border-0 !bg-transparent"
+    pt:mask:class="backdrop-blur-sm"
+  >
+    <template #container>
+      <div
+        class="p-8 gap-y-2 flex flex-col rounded-xl"
+        style="
+          background-image: radial-gradient(
+            circle at left top,
+            var(--p-zinc-200),
+            var(--p-zinc-400)
+          );
+        "
+      >
+        <div class="flex justify-between w-full">
+          <h1 class="font-bold text-blue-900 text-2xl">
+            Habitaciones del hotel {{ hotel.name }}
+          </h1>
+          <p>
+            {{ calculateTotalRooms() }} / {{ hotel.total_rooms }} Habitaciones Registradas
+          </p>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          <div
+            v-for="room in hotel.rooms"
+            :key="room.id"
+            class="bg-white rounded-xl py-2 px-2 flex flex-col gap-y-2 text-sm"
+          >
+            <div class="flex justify-between w-full mr-4 items-centers">
+              <h1>{{ room.total_rooms }} Habitaciones</h1>
+              <h1 class="text-xs">{{ room.room_type }} - {{ room.accommodation }}</h1>
+            </div>
+            <div class="flex justify-between w-full">
+              <Button text label="Editar" severity="warn" size="small"></Button>
+              <Button
+                text
+                label="Eliminar"
+                @click="hotelService.deleteRoom(room.id)"
+                severity="danger"
+                size="small"
+              ></Button>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-2 mt-12 border p-2 rounded-lg bg-white">
+          <InputNumber
+            placeholder="Cuantas Habitaciones Son?"
+            :min="1"
+            :max="calculateTotalRoomsAvailable"
+            v-model="accommodationForm.total_rooms"
+          ></InputNumber>
+          <Select
+            v-model="accommodationForm.room_type"
+            placeholder="Selecione un tipo de habitación"
+            :options="['ESTANDAR', 'JUNIOR', 'SUITE']"
+          ></Select>
+          <Select
+            placeholder="Seleccoinar Acomodación"
+            v-model="accommodationForm.accommodation"
+            :options="optionsAccommodation[accommodationForm.room_type]"
+          ></Select>
+          <div class="flex justify-between items-center">
+            <Button severity="success" @click="submit">
+              <Plus class="size-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </template>
+  </Dialog>
+</template>
+<script setup lang="ts">
+import type { Hotel } from "@/types";
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
+import { computed, ref } from "vue";
+import { Hotel as HotelIcon, Plus } from "lucide-vue-next";
+import InputNumber from "primevue/inputnumber";
+import HotelService from "@/services/Hotels";
+import Select from "primevue/select";
+
+const hotelService = new HotelService();
+
+interface Props {
+  hotel: Hotel;
+}
+const props = defineProps<Props>();
+
+const accommodationForm = ref({
+  total_rooms: 0,
+  room_type: "ESTANDAR",
+  accommodation: "",
+});
+
+const submit = () => {
+  hotelService.addRoom(props.hotel.id, accommodationForm.value);
+};
+
+const visible = ref(false);
+
+const calculateTotalRooms = () => {
+  let total = 0;
+  props.hotel.rooms?.forEach((room) => {
+    total += room.total_rooms;
+  });
+  return total;
+};
+
+const optionsAccommodation = {
+  ESTANDAR: ["SENCILLA", "DOBLE"],
+  JUNIOR: ["TRIPLE", "CUADRUPLE"],
+  SUITE: ["SENCILLA", "DOBLE", "TRIPLE"],
+};
+
+const calculateTotalRoomsAvailable = computed(() => {
+  return props.hotel.total_rooms - calculateTotalRooms();
+});
+</script>

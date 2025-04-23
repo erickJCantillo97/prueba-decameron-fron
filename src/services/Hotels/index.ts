@@ -15,10 +15,13 @@ export default class HotelService {
   }
 
   async create(hotel: Hotel) {
-    const store = useHotelsStore()
-    const { hotels } = storeToRefs(store)
-    const { data } = await axios.post('/hotels', hotel)
-    hotels.value.push(data.hotel)
+    await axios.post('/hotels', hotel)
+    Swal.fire(
+      'Cear!',
+      'Hotel Creado Correctamente.',
+      'success',
+    )
+    this.get()
   }
 
   async delete(id: string) {
@@ -52,5 +55,59 @@ export default class HotelService {
         return
       }
     })
+  }
+
+  async update(hotel: Hotel) {
+    await axios.put(`/hotels/${hotel.id}`, hotel)
+    Swal.fire(
+      'Actualizar!',
+      'Hotel Actualizado Correctamente.',
+      'success',
+    )
+    this.get()
+  }
+
+  async addRoom(id: string, room: any) {
+    const {data} = await axios.post('rooms', {...room, hotel_id: id})
+    Swal.fire(
+      'Actualizar!',
+      data.message,
+     'success',
+    )
+    this.get()
+  }
+
+  async deleteRoom(id: string) {
+    Swal.fire({
+      title: '¿Estas Seguro?',
+      text: 'Eliminar esta Acomodación de la base de datos!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminala!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`rooms/${id}`)
+        this.get()
+        Swal.fire(
+          'Deleted!',
+          'Acomodación Eliminada.',
+          'success',
+        )
+      } catch (error) {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No podemos Eliminar Esta Acomodación!',
+        })
+      }} else {
+        return
+      }
+    })
+
+    this.get()
   }
 }
