@@ -109,7 +109,11 @@ const accommodationForm = ref<{
 });
 
 const submit = () => {
-  hotelService.addRoom(props.hotel.id, accommodationForm.value);
+  hotelService.addRoom(props.hotel.id, {
+    id: '', // Temporary ID that will be replaced by backend
+    hotel_id: props.hotel.id,
+    ...accommodationForm.value
+  });
 };
 
 const visible = ref(false);
