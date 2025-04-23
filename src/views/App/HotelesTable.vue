@@ -39,6 +39,11 @@
           </tr>
         </thead>
         <tbody>
+          <tr v-if="hotels.length === 0">
+            <td class="px-2" v-for="i in 5" :key="i">
+              <Skeleton height="1rem" class="m-2"></Skeleton>
+            </td>
+          </tr>
           <tr v-for="hotel in hotels" :key="hotel.id">
             <td>
               <div class="text-gray-900 py-2 text-sm px-3">
@@ -88,6 +93,7 @@ import { storeToRefs } from "pinia";
 import Button from "primevue/button";
 import Modal from "@/components/app/Hotels/ModalForm.vue";
 import ModalAccomodation from "../../components/app/Hotels/ModalAccomodation.vue";
+import Skeleton from "primevue/skeleton";
 
 const hotelStore = useHotelsStore();
 const hotelService = new HotelService();
