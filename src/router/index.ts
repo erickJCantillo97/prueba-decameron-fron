@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '@/views/Login.vue'
+
 import { useAuthStore } from '@/stores/Auth'
 import { storeToRefs } from 'pinia'
-import Dashboard from '@/views/App/Dashboard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,21 +9,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: Login,
+      component: () => import('@/views/Login.vue'),
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => Dashboard,
+      component: () => import('@/views/App/Dashboard.vue'),
     },
   ],
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const { isAuthenticated } = storeToRefs(authStore)
 
-  console.log(isAuthenticated.value)
   if (to.name != 'login' && !isAuthenticated.value) {
     return { name: 'login' }
   }
