@@ -5,11 +5,10 @@
     >
       <div class="mx-auto w-full max-w-sm lg:w-96">
         <div>
-          <logoAvColombia :letras="true" class="size-20" />
           <h2 class="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900">
             Iniciar sesión
           </h2>
-          <p class="mt-2 text-sm/6 text-gray-500">Bienvenido a la familia AV Colombia</p>
+          <p class="mt-2 text-sm/6 text-gray-500">Bienvenido a Hotel Decameron</p>
         </div>
 
         <div class="mt-10">
@@ -93,12 +92,6 @@
                   :loading="loading"
                   severity="success"
                 ></Button>
-                <!-- <button
-                  type="submit"
-                  class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Sign in
-                </button> -->
               </div>
             </form>
           </div>
@@ -116,7 +109,6 @@
 </template>
 
 <script setup lang="ts">
-import logoAvColombia from "@/components/icons/logoAvColombia.vue";
 import Button from "@/components/ui/Button.vue";
 import AuthService from "@/services/Auth/index";
 import { ref } from "vue";

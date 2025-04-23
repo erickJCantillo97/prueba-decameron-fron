@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { User } from '@/types'
+
 import { useAuthStore } from '@/stores/Auth'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
@@ -10,8 +10,8 @@ export default class AuthService {
     const { user, userToken } = storeToRefs(store)
     const { data } = await axios.post('/login', { email, password })
     user.value = data.user
-    userToken.value = data.access_token
-    axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`
+    userToken.value = data.token
+    axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
     router.push('dashboard')
     // user.value = data.User
   }

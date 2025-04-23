@@ -19,7 +19,7 @@
         <div
           class="size-full bg-white pl-8 text-lg text-gray-700 sm:text-sm/6 flex items-center"
         >
-          <p>Hola bienvenido al portal de proveedores</p>
+          <p>Hola bienvenido al portal de Gestión de Hoteles</p>
         </div>
 
         <div class="flex items-center gap-x-4 lg:gap-x-6">
@@ -73,7 +73,7 @@
 </template>
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-// import { Bars3Icon, ChevronDownIcon } from "@heroicons/vue/24/outline";
+import { Bars3Icon, ChevronDownIcon } from "@heroicons/vue/24/outline";
 import { useAuthStore } from "@/stores/Auth";
 import { storeToRefs } from "pinia";
 import AuthService from "@/services/Auth";

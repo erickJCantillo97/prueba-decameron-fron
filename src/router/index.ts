@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Login',
+      name: 'login',
       component: Login,
     },
     {
@@ -20,12 +20,25 @@ const router = createRouter({
   ],
 })
 
-// router.beforeEach(async (to, from) => {
-//   const isAuthenticated = await checkAuth()
-//   if (isAuthenticated && to.name === 'Login') {
-//     return { name: 'dashboard' }
-//   } else {
-//   }
-// })
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore()
+  const { isAuthenticated } = storeToRefs(authStore)
+  console.log(to)
+  console.log(isAuthenticated.value)
+  if(to.name != 'login' && !isAuthenticated.value){
+    return {name: 'login'}
+  }
+  if (isAuthenticated.value && to.name === 'login') {
+    return { name: 'dashboard' }
+  }
+  // if( !isAuthenticated.value && to.name != 'login' && to.path != '/') {
+  //   return { name: 'login' }
+  // }
+  // if (isAuthenticated && to.name === 'login') {
+  //   console.log('isAuthenticated', isAuthenticated.value)
+  //   return { name: 'dashboard' }
+  // }
+
+})
 
 export default router

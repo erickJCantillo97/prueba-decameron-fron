@@ -43,7 +43,7 @@
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
               <div class="flex h-16 shrink-0 items-center pt-4">
-                <LogoAvColombia :letras="false" class="size-24"></LogoAvColombia>
+                <!-- <LogoAvColombia :letras="false" class="size-24"></LogoAvColombia> -->
               </div>
               <nav class="flex flex-1 flex-col">
                 <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue";
 // import { XMarkIcon, Cog6ToothIcon } from "@heroicons/vue/24/outline";
-import LogoAvColombia from "@/components/icons/logoAvColombia.vue";
+
 interface props {
   navigation: {
     name: string;

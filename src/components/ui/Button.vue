@@ -39,5 +39,6 @@ const color = {
   info: "bg-blue-600 hover:bg-blue-500 focus-visible:outline-blue-600",
   light: "bg-gray-300 hover:bg-gray-200 focus-visible:outline-gray-300",
   dark: "bg-gray-800 hover:bg-gray-700 focus-visible:outline-gray-800",
+  transparent: "bg-transparent hover:bg-gray-100 focus-visible:outline-gray-300",
 };
 </script>

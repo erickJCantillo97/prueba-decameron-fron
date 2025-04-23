@@ -6,7 +6,7 @@
       class="flex grow flex-col gap-y-2 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4"
     >
       <div class="flex py-1 shrink-0 items-center w-full justify-center">
-        <LogoAvColombia :letras="true" class="size-24"></LogoAvColombia>
+        <!-- <LogoAvColombia :letras="true" class="size-24"></LogoAvColombia> -->
       </div>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -56,7 +56,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import LogoAvColombia from "@/components/icons/logoAvColombia.vue";
+// import LogoAvColombia from "@/components/icons/logoAvColombia.vue";
 // import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 interface props {
   navigation: {
