@@ -39,8 +39,7 @@
               <h1>{{ room.total_rooms }} Habitaciones</h1>
               <h1 class="text-xs">{{ room.room_type }} - {{ room.accommodation }}</h1>
             </div>
-            <div class="flex justify-between w-full">
-              <Button text label="Editar" severity="warn" size="small"></Button>
+            <div class="flex justify-end w-full">
               <Button
                 text
                 label="Eliminar"

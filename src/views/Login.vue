@@ -111,6 +111,7 @@
 <script setup lang="ts">
 import Button from "@/components/ui/Button.vue";
 import AuthService from "@/services/Auth/index";
+import Swal from "sweetalert2";
 import { ref } from "vue";
 const services = new AuthService();
 
@@ -123,7 +124,18 @@ const form = ref({
 
 async function submit() {
   loading.value = true;
-  await services.login(form.value.email, form.value.password);
-  loading.value = false;
+  try {
+    await services.login(form.value.email, form.value.password);
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Credenciales incorrectas",
+    });
+    console.error("Error during login:", error);
+    // Handle error (e.g., show a notification)
+  } finally {
+    loading.value = false;
+  }
 }
 </script>

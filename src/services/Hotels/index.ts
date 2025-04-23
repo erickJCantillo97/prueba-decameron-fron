@@ -6,6 +6,14 @@ import { storeToRefs } from 'pinia'
 import type { Hotel, Room } from '@/types'
 import Swal from 'sweetalert2'
 
+const getErrorMessage = (error: string) => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: error,
+  })
+}
+
 export default class HotelService {
   async get() {
     const store = useHotelsStore()
@@ -15,13 +23,20 @@ export default class HotelService {
   }
 
   async create(hotel: Hotel) {
-    await axios.post('/hotels', hotel)
-    Swal.fire(
-      'Cear!',
-      'Hotel Creado Correctamente.',
-      'success',
-    )
-    this.get()
+    try {
+
+      await axios.post('/hotels', hotel)
+      Swal.fire(
+        'Cear!',
+        'Hotel Creado Correctamente.',
+        'success',
+      )
+      this.get()
+      return true;
+    } catch (error: unknown) {
+      getErrorMessage(error.response.data.message)
+      return false
+    }
   }
 
   async delete(id: string) {
@@ -59,18 +74,24 @@ export default class HotelService {
   }
 
   async update(hotel: Hotel) {
-    await axios.put(`/hotels/${hotel.id}`, hotel)
-    Swal.fire(
-      'Actualizar!',
-      'Hotel Actualizado Correctamente.',
-      'success',
-    )
-    this.get()
+    try {
+      await axios.put(`/hotels/${hotel.id}`, hotel)
+
+      Swal.fire(
+        'Actualizar!',
+        'Hotel Actualizado Correctamente.',
+        'success',
+      )
+      this.get()
+      return true
+    } catch (error: unknown) {
+      getErrorMessage(error.response.data.message)
+      return false
+    }
   }
 
   async addRoom(id: string, room: Room) {
     try {
-
       const { data } = await axios.post('rooms', { ...room, hotel_id: id })
       Swal.fire(
         'Actualizar!',
@@ -79,13 +100,7 @@ export default class HotelService {
       )
       this.get()
     } catch (error: unknown) {
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error.response.data.message,
-      })
-      console.log(error)
+      getErrorMessage(error.response.data.message)
     }
   }
 
