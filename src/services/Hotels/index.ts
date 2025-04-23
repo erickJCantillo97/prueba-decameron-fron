@@ -1,5 +1,6 @@
 
-import axios from 'axios'
+import axios  from 'axios'
+import {  AxiosError } from 'axios'
 import { useHotelsStore } from '@/stores/hotels'
 import { storeToRefs } from 'pinia'
 
@@ -33,8 +34,9 @@ export default class HotelService {
       )
       this.get()
       return true;
-    } catch (error: unknown) {
-      getErrorMessage(error.response.data.message)
+    } catch (error ) {
+      if(axios.isAxiosError(error))
+        getErrorMessage(error.response?.data.message)
       return false
     }
   }
@@ -85,7 +87,8 @@ export default class HotelService {
       this.get()
       return true
     } catch (error: unknown) {
-      getErrorMessage(error.response.data.message)
+      if(axios.isAxiosError(error))
+        getErrorMessage(error.response?.data.message)
       return false
     }
   }
@@ -100,7 +103,8 @@ export default class HotelService {
       )
       this.get()
     } catch (error: unknown) {
-      getErrorMessage(error.response.data.message)
+      if(axios.isAxiosError(error))
+        getErrorMessage(error.response?.data.message)
     }
   }
 
@@ -124,7 +128,6 @@ export default class HotelService {
             'success',
           )
         } catch (error) {
-          console.log(error)
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
