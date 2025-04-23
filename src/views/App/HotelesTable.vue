@@ -1,15 +1,25 @@
 <template>
   <div class="px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
+    <div class="flex justify-between items-center">
+      <div class="">
         <h1 class="text-base font-semibold text-gray-900">Hoteles</h1>
-        <p class="mt-2 text-sm text-gray-700">Listado de Hoteles</p>
+        <div class="flex gap-x-4">
+          <p class="mt-2 text-xs text-gray-700 p-2 bg-gray-100 rounded-lg">
+            {{ hotels.length }} Hoteles Registrados
+          </p>
+          <p class="mt-2 text-xs text-gray-700 p-2 bg-gray-100 rounded-lg">
+            {{ hotels.reduce((acc, hotel) => acc + hotel.total_rooms, 0) }} Habitaciones
+            en Total
+          </p>
+        </div>
       </div>
+
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center gap-x-2">
         <Modal> Nuevo Hotel </Modal>
       </div>
     </div>
-    <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
+
+    <div class="-mx-4 mt-6 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
