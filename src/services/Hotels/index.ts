@@ -3,15 +3,22 @@ import axios  from 'axios'
 import {  AxiosError } from 'axios'
 import { useHotelsStore } from '@/stores/hotels'
 import { storeToRefs } from 'pinia'
+import Toast from './Toats'
 
 import type { Hotel, Room } from '@/types'
 import Swal from 'sweetalert2'
 
 const getErrorMessage = (error: string) => {
-  Swal.fire({
+  Toast.fire({
     icon: 'error',
-    title: 'Oops...',
-    text: error,
+    title: error,
+})
+}
+
+const getSuccessMessage = (message: string) => {
+  Toast.fire({
+    icon: 'success',
+    title: message,
   })
 }
 
@@ -27,11 +34,7 @@ export default class HotelService {
     try {
 
       await axios.post('/hotels', hotel)
-      Swal.fire(
-        'Cear!',
-        'Hotel Creado Correctamente.',
-        'success',
-      )
+      getSuccessMessage('Hotel Creado Correctamente')
       this.get()
       return true;
     } catch (error ) {
@@ -53,21 +56,11 @@ export default class HotelService {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-
           await axios.delete(`/hotels/${id}`)
           this.get()
-          Swal.fire(
-            'Deleted!',
-            'Hotel Eliminado.',
-            'success',
-          )
+          getSuccessMessage('Hotel Eliminado Correctamente')
         } catch (error) {
-          console.log(error)
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No podemos Eliminar Este Hotel!',
-          })
+          getErrorMessage('No podemos Eliminar Este Hotel!')
         }
       } else {
         return
@@ -78,12 +71,7 @@ export default class HotelService {
   async update(hotel: Hotel) {
     try {
       await axios.put(`/hotels/${hotel.id}`, hotel)
-
-      Swal.fire(
-        'Actualizar!',
-        'Hotel Actualizado Correctamente.',
-        'success',
-      )
+      getSuccessMessage('Hotel Actualizado Correctamente')
       this.get()
       return true
     } catch (error: unknown) {
@@ -96,11 +84,7 @@ export default class HotelService {
   async addRoom(id: string, room: Room) {
     try {
       const { data } = await axios.post('rooms', { ...room, hotel_id: id })
-      Swal.fire(
-        'Actualizar!',
-        data.message,
-        'success',
-      )
+      getSuccessMessage('Acomodación Creada Correctamente')
       this.get()
     } catch (error: unknown) {
       if(axios.isAxiosError(error))
@@ -116,29 +100,18 @@ export default class HotelService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminala!',
+      confirmButtonText: 'Si, Eliminar!',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await axios.delete(`rooms/${id}`)
           this.get()
-          Swal.fire(
-            'Deleted!',
-            'Acomodación Eliminada.',
-            'success',
-          )
+          getSuccessMessage('Acomodación Eliminada Correctamente')
         } catch (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No podemos Eliminar Esta Acomodación!',
-          })
+          getErrorMessage('No podemos Eliminar Esta Acomodación!')
         }
-      } else {
-        return
       }
     })
-
     this.get()
   }
 }

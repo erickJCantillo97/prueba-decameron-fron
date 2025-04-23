@@ -42,7 +42,7 @@
             class="bg-white rounded-xl py-2 px-2 flex flex-col gap-y-2 text-sm"
           >
             <div class="flex justify-center font-bold w-full mr-4 items-center">
-              <h1 class="text-lg">{{ room.total_rooms }} Habitaciones</h1>
+              <h1 class="text-lg text-sky-700">{{ room.total_rooms }} Habitaciones</h1>
             </div>
             <div class="flex justify-between w-full items-center">
               <h1 class="text-xs font-semibold">
@@ -135,6 +135,11 @@ const submit = () => {
     hotel_id: props.hotel.id,
     ...accommodationForm.value,
   });
+  accommodationForm.value = {
+    total_rooms: 0,
+    room_type: "ESTANDAR",
+    accommodation: "",
+  }
 };
 
 const visible = ref(false);
