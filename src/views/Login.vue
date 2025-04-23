@@ -101,7 +101,7 @@
     <div class="relative hidden w-0 flex-1 lg:block">
       <img
         class="absolute inset-0 size-full object-cover"
-        src="@/img/loginImage.jpg"
+        src="https://images.trvl-media.com/lodging/4000000/3470000/3462900/3462809/29e27c4c.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
         alt="Foto"
       />
     </div>
