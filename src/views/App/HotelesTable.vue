@@ -95,6 +95,6 @@ const hotelService = new HotelService();
 const { hotels } = storeToRefs(hotelStore);
 
 onMounted(async () => {
- await hotelService.get();
+  await hotelService.get();
 });
 </script>

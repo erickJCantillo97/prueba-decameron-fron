@@ -41,11 +41,13 @@
             :key="room.id"
             class="bg-white rounded-xl py-2 px-2 flex flex-col gap-y-2 text-sm"
           >
-            <div class="flex justify-between w-full mr-4 items-centers">
-              <h1>{{ room.total_rooms }} Habitaciones</h1>
-              <h1 class="text-xs">{{ room.room_type }} - {{ room.accommodation }}</h1>
+            <div class="flex justify-center font-bold w-full mr-4 items-center">
+              <h1 class="text-lg">{{ room.total_rooms }} Habitaciones</h1>
             </div>
-            <div class="flex justify-end w-full">
+            <div class="flex justify-between w-full items-center">
+              <h1 class="text-xs font-semibold">
+                {{ room.room_type }} - {{ room.accommodation }}
+              </h1>
               <Button
                 text
                 label="Eliminar"
@@ -57,29 +59,41 @@
           </div>
         </div>
         <div class="grid grid-cols-4 gap-2 mt-12 border p-2 rounded-lg bg-white">
-          <InputNumber
-            placeholder="Cuantas Habitaciones Son?"
-            :min="1"
-            :max="calculateTotalRoomsAvailable"
-            v-model="accommodationForm.total_rooms"
-          ></InputNumber>
-          <Select
-            v-model="accommodationForm.room_type"
-            placeholder="Selecione un tipo de habitación"
-            :options="['ESTANDAR', 'JUNIOR', 'SUITE']"
-          ></Select>
-          <Select
-            placeholder="Seleccoinar Acomodación"
-            v-model="accommodationForm.accommodation"
-            :options="optionsAccommodation[accommodationForm.room_type]"
-          ></Select>
+          <IftaLabel>
+            <InputNumber
+              placeholder="Cuantas Habitaciones Son?"
+              :min="1"
+              id="total_rooms"
+              :max="calculateTotalRoomsAvailable"
+              v-model="accommodationForm.total_rooms"
+            ></InputNumber>
+            <label for="total_rooms">Habitaciones</label>
+          </IftaLabel>
+          <IftaLabel>
+            <Select
+              class="w-full"
+              v-model="accommodationForm.room_type"
+              placeholder="Selecione un tipo de habitación"
+              :options="['ESTANDAR', 'JUNIOR', 'SUITE']"
+            ></Select>
+            <label for="">Tipo de Habitación</label>
+          </IftaLabel>
+          <IftaLabel>
+            <Select
+              class="w-full"
+              placeholder="Seleccoinar Acomodación"
+              v-model="accommodationForm.accommodation"
+              :options="optionsAccommodation[accommodationForm.room_type]"
+            ></Select>
+            <label for="">Acomodación</label>
+          </IftaLabel>
           <div class="flex justify-between items-center">
             <Button
               severity="success"
+              label="Agregar"
               :disabled="accommodationForm.total_rooms == 0"
               @click="submit"
             >
-              <Plus class="size-4" />
             </Button>
           </div>
         </div>
@@ -96,6 +110,7 @@ import { Hotel as HotelIcon, Plus, X } from "lucide-vue-next";
 import InputNumber from "primevue/inputnumber";
 import HotelService from "@/services/Hotels";
 import Select from "primevue/select";
+import IftaLabel from "primevue/iftalabel";
 
 const hotelService = new HotelService();
 
