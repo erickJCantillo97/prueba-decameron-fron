@@ -20,19 +20,19 @@ const router = createRouter({
   ],
 })
 
-// router.beforeEach(async (to, from) => {
-//   const authStore = useAuthStore()
-//   const { isAuthenticated } = storeToRefs(authStore)
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore()
+  const { isAuthenticated } = storeToRefs(authStore)
 
-//   console.log(isAuthenticated.value)
-//   if (to.name != 'login' && !isAuthenticated.value) {
-//     return { name: 'login' }
-//   }
-//   if (isAuthenticated.value && to.name === 'login') {
-//     return { name: 'dashboard' }
-//   }
+  console.log(isAuthenticated.value)
+  if (to.name != 'login' && !isAuthenticated.value) {
+    return { name: 'login' }
+  }
+  if (isAuthenticated.value && to.name === 'login') {
+    return { name: 'dashboard' }
+  }
 
 
-// })
+})
 
 export default router
