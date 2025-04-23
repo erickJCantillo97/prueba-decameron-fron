@@ -95,7 +95,11 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-const accommodationForm = ref({
+const accommodationForm = ref<{
+  total_rooms: number;
+  room_type: keyof typeof optionsAccommodation;
+  accommodation: string;
+}>({
   total_rooms: 0,
   room_type: "ESTANDAR",
   accommodation: "",
@@ -115,7 +119,7 @@ const calculateTotalRooms = () => {
   return total;
 };
 
-const optionsAccommodation = {
+const optionsAccommodation: Record<"ESTANDAR" | "JUNIOR" | "SUITE", string[]> = {
   ESTANDAR: ["SENCILLA", "DOBLE"],
   JUNIOR: ["TRIPLE", "CUADRUPLE"],
   SUITE: ["SENCILLA", "DOBLE", "TRIPLE"],
